@@ -24,7 +24,7 @@ export const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <Link className="nav-brand" to="/">
-                    <img class="d-inline-block " src={logoImageUrl} alt="Logo" width="120" height="50" />
+                    <img className="d-inline-block " src={logoImageUrl} alt="Logo" width="120" height="50" />
                 </Link>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav ms-auto me-auto mb-2 mb-lg-0">

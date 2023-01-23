@@ -2,16 +2,27 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Carousel } from "../component/carousel";
+import { Card } from "../component/cards";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
+		<div className="container-fluid text-center mt-5">
+			<Carousel/>
+			<h1>Categorías</h1>
+			<div className="row justify-content-evenly mb-5">
+				<div className="col-sm ">
+					<Card/> 
+				</div>
+				<div className="col-sm">
+					<Card/> 
+				</div>
+				<div className="col-sm">
+					<Card/> 
+				</div>
+			</div>
 			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
 			</div>
