@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Shop } from "./pages/shop";
+import { ShoppingCart } from "./pages/shopping-cart";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -25,11 +26,12 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
+                        {/* <Route element={<Demo />} path="/demo" />   */}
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        {/* <Route element={<Single />} path="/single/:theid" /> */}
                         <Route element={<Shop />} path="/shop" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<ShoppingCart />} path="/shopping-cart" />
+                        <Route path='*' element={<h1 className="text-center alert alert-info my-5 p-5">Oops! El recurso solicitado no está disponible</h1>} />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
