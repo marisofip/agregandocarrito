@@ -5,7 +5,7 @@ export const Shipping = () => {
 
 	return (
         <> 
-<div className="container  justify-content-center">
+<div className="container  justify-content-center mt-5  mb-5">
   
 <h1 className="fw-normal  p-0 shadow-none p-3 mb-5 bg-light rounded-4 border border-dark" style={{textAlign: "center" , boxShadow: "0.2"}}>Datos de Despacho</h1>
 
