@@ -6,9 +6,9 @@ export const Card = () => {
             <div className="card mx-auto my-1" style={{ width: '33rem' }}>
                 <img src={ImageUrl} className="card-img-top" alt="..."/>
                 <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
+                    <h5 className="card-title">Categoría</h5>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                    <a href="#" className="btn btn-primary">Ir a categoría</a>
                 </div>
             </div>
     );
