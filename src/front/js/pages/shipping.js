@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { TotalCompra } from "../component/totalcompra";
 
 export const Shipping = () => {
 	
@@ -11,32 +12,7 @@ export const Shipping = () => {
 
   <div className="row g-5">
       <div className="col-md-5 col-lg-4 order-md-last">
-        <h4 className="d-flex justify-content-between align-items-center mb-3">
-          <span className="text-dark">Resumen</span>
-          
-        </h4>
-        <ul className="list-group mb-3 ">
-          <li className="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Subtotal</h6>
-             
-            </div>
-            <span className="text-muted">$12.000</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Despacho</h6>
-             
-            </div>
-            <span className="text-muted">$8.000</span>
-          </li>
-          
-         
-          <li className="list-group-item d-flex justify-content-between">
-            <span>Total</span>
-            <strong>$20.000</strong>
-          </li>
-        </ul>
+        <TotalCompra/>
 
       </div>
       
