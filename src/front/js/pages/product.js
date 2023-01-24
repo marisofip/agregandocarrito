@@ -19,10 +19,20 @@ export const Product = () => {
           </form>
         </h1>
         <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre Producto</th>
+              <th scope="col">Stock</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
+              <td>1</td>
+              <td>Producto 1</td>
               <td>
-                Producto 1{" "}
+                {" "}
+                20{" "}
                 <button className="border border-0 bg-transparent float-md-end">
                   {" "}
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
@@ -30,16 +40,22 @@ export const Product = () => {
               </td>
             </tr>
             <tr>
+              <td>2</td>
+              <td>Produto 2</td>
               <td>
-                Produto 2{" "}
+                {" "}
+                100{" "}
                 <button className="border border-0 bg-transparent float-md-end">
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
                 </button>
               </td>
             </tr>
             <tr>
+              <td>2</td>
+              <td>Produto 3</td>
               <td>
-                Produto 3{" "}
+                {" "}
+                50{" "}
                 <button className="border border-0 bg-transparent float-md-end">
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
                 </button>
