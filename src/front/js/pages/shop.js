@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar } from "react-bootstrap";
 import { Card } from "../component/cards";
-import { Detail } from "../component/detail-prod";
+import { Detail, DetailCard } from "../component/detail-prod";
 import { Context } from "../store/appContext";
 
 export const Shop = () => {
@@ -17,16 +17,16 @@ export const Shop = () => {
         <Card />
       </div>
       <div className="container d-flex justify-content-center ">
-        <Detail />
-        <Detail />
-        <Detail />
-        <Detail />
+        <DetailCard />
+        <DetailCard />
+        <DetailCard />
+        <DetailCard />
       </div>
       <div className="container d-flex justify-content-center">
-        <Detail />
-        <Detail />
-        <Detail />
-        <Detail />
+        <DetailCard />
+        <DetailCard />
+        <DetailCard />
+        <DetailCard />
       </div>
     </>
   );

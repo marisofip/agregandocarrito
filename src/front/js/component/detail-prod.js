@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ImageUrl from "../../img/fondo.png";
 
-export const Detail = () => {
+export const DetailCard = () => {
   return (
     <>
       <div className="card mb-3">
