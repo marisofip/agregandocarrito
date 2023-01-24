@@ -11,6 +11,7 @@ import { ShoppingCart } from "./pages/shopping-cart";
 import injectContext from "./store/appContext";
 import { Detail } from "./pages/detail_product";
 import { Payments } from "./pages/payment.js"
+import { Categoria } from "./pages/create_category";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -39,6 +40,7 @@ const Layout = () => {
                         <Route element={<ShoppingCart />} path="/shopping-cart" />
                         <Route element={<Detail />} path="/detail_product" />
                         <Route element={<Payments />} path="/payment" />
+                        <Route element={<Categoria />} path='/create_category' />
                         <Route path='*' element={<h1 className="text-center alert alert-info my-5 p-5">Oops! El recurso solicitado no está disponible</h1>} />
                     </Routes>
                     <Footer />
