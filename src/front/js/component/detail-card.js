@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import ImageUrl from "../../img/fondo.png";
+import { Link } from "react-router-dom";
+import { Detail } from "../pages/detail_product";
 
 export const DetailCard = () => {
   return (
@@ -17,9 +19,9 @@ export const DetailCard = () => {
             <div className="card-body">
               <h5 className="card-title">Producto 1</h5>
               <p className="card-text">30.000$</p>
-              <a href="#" className="btn btn-primary">
+              <Link to="/detail_product" className="btn btn-primary">
                 Ver
-              </a>
+              </Link>
             </div>
           </div>
         </div>

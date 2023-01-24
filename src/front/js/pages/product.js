@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 export const Product = () => {
   return (
@@ -33,10 +34,13 @@ export const Product = () => {
               <td>
                 {" "}
                 20{" "}
-                <button className="border border-0 bg-transparent float-md-end">
+                <Link
+                  className="border border-0 bg-transparent float-md-end"
+                  to="/edit_product"
+                >
                   {" "}
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
-                </button>
+                </Link>
               </td>
             </tr>
             <tr>
@@ -45,9 +49,13 @@ export const Product = () => {
               <td>
                 {" "}
                 100{" "}
-                <button className="border border-0 bg-transparent float-md-end">
+                <Link
+                  className="border border-0 bg-transparent float-md-end"
+                  to="/edit_product"
+                >
+                  {" "}
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
-                </button>
+                </Link>
               </td>
             </tr>
             <tr>
@@ -56,18 +64,26 @@ export const Product = () => {
               <td>
                 {" "}
                 50{" "}
-                <button className="border border-0 bg-transparent float-md-end">
+                <Link
+                  className="border border-0 bg-transparent float-md-end"
+                  to="/edit_product"
+                >
+                  {" "}
                   <img src="https://img.icons8.com/material-sharp/2x/pencil--v2.png" />{" "}
-                </button>
+                </Link>
               </td>
             </tr>
           </tbody>
         </table>
 
         <div className="d-grid gap-4 d-md-flex justify-content-md-center pt-5">
-          <button className="btn btn-success mt-5 " type="button">
+          <Link
+            className="btn btn-success mt-5 "
+            type="button"
+            to="/create_product"
+          >
             Crear Producto
-          </button>
+          </Link>
           <button className="btn btn-secondary mt-5 " type="button">
             Cancelar
           </button>

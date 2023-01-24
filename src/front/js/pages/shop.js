@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar } from "react-bootstrap";
 import { Card } from "../component/cards";
-import { Detail, DetailCard } from "../component/detail-prod";
+import { DetailCard } from "../component/detail-card";
 import { Context } from "../store/appContext";
 
 export const Shop = () => {

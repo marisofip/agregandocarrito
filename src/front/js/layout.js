@@ -13,7 +13,10 @@ import { Detail } from "./pages/detail_product";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Product } from "./pages/product";
+import { Create } from "./pages/create_product";
 import { Modify } from "./pages/edit_product";
+import { Shipping } from "./pages/shipping";
 import { RegistroUsuario } from "./pages/registro_usuario";
 
 //create your first component
@@ -34,8 +37,11 @@ const Layout = () => {
                         <Route element={<RegistroUsuario />} path="/registro_usuario" />
                         {/* <Route element={<Single />} path="/single/:theid" /> */}
                         <Route element={<Shop />} path="/shop" />
+                        <Route element={<Product />} path="/products" />
+                        <Route element={<Create />} path="/create_product" />
                         <Route element={<Modify />} path="/edit_product" />
                         <Route element={<ShoppingCart />} path="/shopping-cart" />
+                        <Route element={<Shipping />} path="/shipping" />
                         <Route element={<Detail />} path="/detail_product" />
                         <Route path='*' element={<h1 className="text-center alert alert-info my-5 p-5">Oops! El recurso solicitado no está disponible</h1>} />
                     </Routes>
