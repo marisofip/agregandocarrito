@@ -9,6 +9,7 @@ import { Single } from "./pages/single";
 import { Shop } from "./pages/shop";
 import { ShoppingCart } from "./pages/shopping-cart";
 import injectContext from "./store/appContext";
+import { Detail } from "./pages/detail_product";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -17,9 +18,9 @@ import { RegistroUsuario } from "./pages/registro_usuario";
 
 //create your first component
 const Layout = () => {
-  //the basename is used when your project is published in a subdirectory and not in the root of the domain
-  // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-  const basename = process.env.BASENAME || "";
+    //the basename is used when your project is published in a subdirectory and not in the root of the domain
+    // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+    const basename = process.env.BASENAME || "";
 
     return (
         <div>
@@ -35,6 +36,7 @@ const Layout = () => {
                         <Route element={<Shop />} path="/shop" />
                         <Route element={<Modify />} path="/edit_product" />
                         <Route element={<ShoppingCart />} path="/shopping-cart" />
+                        <Route element={<Detail />} path="/detail_product" />
                         <Route path='*' element={<h1 className="text-center alert alert-info my-5 p-5">Oops! El recurso solicitado no está disponible</h1>} />
                     </Routes>
                     <Footer />
