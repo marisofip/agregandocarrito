@@ -11,7 +11,8 @@ class User(db.Model):
     telefono = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    roles = db.relationship('Role', secondary= 'rolesUsers')
+   
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -31,6 +32,7 @@ class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), unique=False, nullable=False)
+    users = db.relationship('User', secondary= 'rolesUsers')
 
     def __repr__(self):
         return f'<Role {self.id}>'
@@ -44,29 +46,31 @@ class Role(db.Model):
 
 class RoleUser(db.Model):
     __tablename__ = 'rolesUsers'
-    user_id = db.Column("user_id", db.Integer,
-                        db.ForeignKey("users.id"), primary_key=True)
-    roleID = db.Column("role", db.Integer, db.ForeignKey(
-        "roles.id"), primary_key=False)
+    user_id = db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True)
+    role_id = db.Column("role", db.Integer, db.ForeignKey("roles.id"), primary_key=False)
+
+    
 
     def __repr__(self):
         return f'<RoleUser {self.user_id}>'
-        # return f'<RoleUser{self.roleID}>'
+        # return f'<RoleUser{self.role_id}>'
 
     def serialize(self):
         return {
             "user_id": self.user_id,
-            "roleID": self.roleID
+            "role_id": self.role_id
         }
 
 
-class Direction(db.Model):
-    __tablename__ = 'directions'
+class Direccion(db.Model):
+    __tablename__ = 'direcciones'
     id = db.Column(db.Integer, primary_key=True)
     direccion = db.Column(db.String(250), unique=True, nullable=False)
     comuna = db.Column(db.String(80), unique=False, nullable=False)
     ciudad = db.Column(db.String(80), unique=False, nullable=False)
     codigoPostal = db.Column(db.Integer, unique=False, nullable=False)
+    documentos = db.relationship('Documento', backref= 'direccion')
+    pedidos = db.relationship('Pedido', backref= 'direccion')
 
     def __repr__(self):
         return f'<Direccion {self.id}>'
@@ -87,6 +91,7 @@ class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(250), unique=True, nullable=False)
     descripcion = db.Column(db.String(80), unique=False, nullable=False)
+    products = db.relationship('Product', backref= 'categoria')
 
     def __repr__(self):
         return f'<Categoria {self.nombre}>'
@@ -106,8 +111,8 @@ class Product(db.Model):
     nombre = db.Column(db.String(250), unique=True, nullable=False)
     descripcion = db.Column(db.String(80), unique=False, nullable=False)
     precio = db.Column(db.Integer, unique=False, nullable=False)
-    categoriaID = db.Column("categoria_id", db.Integer,
-                            db.ForeignKey("categorias.id"), primary_key=False)
+    categoria_id = db.Column("categoria_id", db.Integer, db.ForeignKey("categorias.id"))
+    
 
     def __repr__(self):
         return f'<Producto {self.nombre}>'
@@ -118,7 +123,7 @@ class Product(db.Model):
             "nombre": self.nombre,
             "descripcion": self.descripcion,
             "precio": self.precio,
-            "categoriaID": self.categoriaID
+            "categoria_id": self.categoria_id
             # do not serialize the password, its a security breach
         }
 
@@ -127,9 +132,10 @@ class Pedido(db.Model):
     __tablename__ = 'pedidos'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, unique=True, nullable=False)
-    direccion = db.Column(db.Integer, unique=False, nullable=False)
+    direccions_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"))
     status = db.Column(db.Integer, unique=False, nullable=False)
     total = db.Column(db.Integer, unique=False, nullable=False)
+    pedDetalles = db.relationship('PedDetalle', backref= 'pedido')
 
     def __repr__(self):
         return f'<Pedido {self.id}>'
@@ -143,14 +149,14 @@ class Pedido(db.Model):
 
 
 class PedDetalle(db.Model):
-    __tablename__ = 'PedDetalles'
+    __tablename__ = 'pedDetalles'
     id = db.Column(db.Integer, primary_key=True)
-    id_ped = db.Column(db.Integer, db.ForeignKey(
-        "pedidos.id"), primary_key=False)
-    id_prod = db.Column(db.Integer, db.ForeignKey(
-        "products.id"), primary_key=False)
+    ped_id = db.Column(db.Integer, db.ForeignKey("pedidos.id"), primary_key=False)
+    prod_id = db.Column(db.Integer, db.ForeignKey("products.id"), primary_key=False)
     cantidad = db.Column(db.Integer, unique=False, nullable=False)
     precio = db.Column(db.Integer, unique=False, nullable=False)
+    producto = db.relationship('Product', backref= 'pedDetalles')
+    
 
     def __repr__(self):
         return f'<PedDetalle {self.id}>'
@@ -158,8 +164,8 @@ class PedDetalle(db.Model):
         def serialize(self):
             return {
                 "id": self.id,
-                "id_ped": self.id_ped,
-                "id_prod": self.id_prod,
+                "ped_id": self.ped_id,
+                "prod_id": self.prod_id,
                 "cantidad": self.cantidad,
                 "precio": self.precio,
             }
@@ -168,14 +174,11 @@ class PedDetalle(db.Model):
 class Documento(db.Model):
     __tablename__ = 'documentos'
     id = db.Column(db.Integer, primary_key=True)
-    users_id = db.Column(db.Integer, db.ForeignKey(
-        "users.id"), primary_key=False)
-    id_direccion = db.Column(db.Integer, db.ForeignKey(
-        "directions.id"), primary_key=False)
+    users_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    direccions_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"))
     iva = db.Column(db.Integer, unique=False, nullable=False)
     total = db.Column(db.Integer, unique=False, nullable=False)
-    id_tipo = db.Column(db.Integer, db.ForeignKey(
-        "tip_documents.id"), primary_key=False)
+    tipo_id = db.Column(db.Integer, db.ForeignKey("tip_documents.id"))
 
     def __repr__(self):
         return f'<documentos {self.id}>'
@@ -184,28 +187,27 @@ class Documento(db.Model):
             return {
                 "id": self.id,
                 "users_id": self.user_id,
-                "id_direcion": self.id_direccion,
+                "direccion_id": self.direccion_id,
                 "iva": self.iva,
                 "total": self.total
             }
 
 
-class Doc_Detalle(db.Model):
-    __tablename__ = 'doc_detalles'
-    id_doc = db.Column(db.Integer, db.ForeignKey(
-        "documentos.id"), primary_key=True)
-    id_prod = db.Column(db.Integer, db.ForeignKey(
-        "products.id"), primary_key=False)
+class DocDetalle(db.Model):
+    __tablename__ = 'docDetalles'
+    doc_id = db.Column(db.Integer, db.ForeignKey("documentos.id"), primary_key=True)
+    prod_id = db.Column(db.Integer, db.ForeignKey("products.id"), primary_key=False)
     cantidad = db.Column(db.Integer, unique=False, nullable=False)
     precio = db.Column(db.Integer, unique=False, nullable=False)
+    producto = db.relationship('Product', backref= 'docDetalles')
 
     def __repr__(self):
-        return f'<doc_detalles {self.id_doc}>'
+        return f'<doc_detalles {self.doc_id}>'
 
         def serialize(self):
             return {
-                "id_doc": self.id_doc,
-                "id_prod": self.id_prod,
+                "doc_id": self.doc_id,
+                "prod_id": self.prod_id,
                 "cantidad": self.cantidad,
                 "precio": self.precio
             }
@@ -215,6 +217,8 @@ class tip_document(db.Model):
     __tablename__ = 'tip_documents'
     id = db.Column(db.Integer, primary_key=True)
     tipo = db.Column(db.Integer, unique=False)
+    documentos = db.relationship('Documento', backref= 'tip_document')
+
 
     def __repr__(self):
         return f'<tip_documents{self.id}>'
