@@ -74,6 +74,11 @@ export const Navbar = () => {
               Buscar
             </button>
           </form>
+          <div className="nav-item">
+              <Link className="nav-link" to="/shopping-cart">
+                <i className="fa-solid fa-cart-shopping fa-xl text-body"/>
+              </Link>
+          </div>
         </div>
       </div>
     </nav>

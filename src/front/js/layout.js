@@ -18,6 +18,9 @@ import { Create } from "./pages/create_product";
 import { Modify } from "./pages/edit_product";
 import { Shipping } from "./pages/shipping";
 import { RegistroUsuario } from "./pages/registro_usuario";
+import { Users } from "./pages/users";
+import { EditUser } from "./pages/edit_user";
+import { Pedidos } from "./pages/pedidos";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +38,9 @@ const Layout = () => {
                         {/* <Route element={<Demo />} path="/demo" /> */}
                         <Route element={<Login />} path="/login" />
                         <Route element={<RegistroUsuario />} path="/registro_usuario" />
+                        <Route element={<Users />} path="/users" />
+                        <Route element={<EditUser />} path="/edit_user" />
+                        <Route element={<Pedidos />} path="/pedidos" />
                         {/* <Route element={<Single />} path="/single/:theid" /> */}
                         <Route element={<Shop />} path="/shop" />
                         <Route element={<Product />} path="/products" />
