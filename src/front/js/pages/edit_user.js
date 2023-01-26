@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 
-export const RegistroUsuario = () => {
+export const EditUser = () => {
   return (
     <>
       <div className="container w-50 justify-content-center mt-5  mb-5">
-        <h1 className="fw-normal text-white shadow-none p-3 mb-5 bg-info rounded-4 "
-          style={{ textAlign: "center", boxShadow: "0.2" }}>
-            Registro de Usuario
-        </h1>
+      <h1 className="p-3 mb-5 bg-secondary rounded-4 text-white text-center">
+            Crear - Editar Usuario
+          </h1>
         <form className="row g-3">
 
           <div className="form-floating col-md-6">
@@ -71,7 +70,7 @@ export const RegistroUsuario = () => {
           </div>
           <div className="d-grid gap-4 d-md-flex justify-content-md-end pt-5">
             <button className="btn btn-success mt-2" type="button">
-              Siguiente
+              Guardar
             </button>
             <button className="btn btn-secondary mt-2" type="button">
               Cancelar
