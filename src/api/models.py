@@ -27,6 +27,15 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -42,6 +51,15 @@ class Role(db.Model):
             "id": self.id,
             "nombre": self.nombre,
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 
 class RoleUser(db.Model):
@@ -60,7 +78,15 @@ class RoleUser(db.Model):
             "user_id": self.user_id,
             "role_id": self.role_id
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Direccion(db.Model):
     __tablename__ = 'direcciones'
@@ -84,7 +110,15 @@ class Direccion(db.Model):
             "codigoPostal": self.codigoPostal,
             # do not serialize the password, its a security breach
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Categoria(db.Model):
     __tablename__ = 'categorias'
@@ -103,7 +137,15 @@ class Categoria(db.Model):
             "descripcion": self.descripcion,
             # do not serialize the password, its a security breach
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -126,13 +168,21 @@ class Product(db.Model):
             "categoria_id": self.categoria_id
             # do not serialize the password, its a security breach
         }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Pedido(db.Model):
     __tablename__ = 'pedidos'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, unique=True, nullable=False)
-    direccions_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"))
+    user_id = db.Column("user_id", db.Integer, db.ForeignKey("users.id"), unique=False)
+    direcciones_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"), unique=False)
     status = db.Column(db.Integer, unique=False, nullable=False)
     total = db.Column(db.Integer, unique=False, nullable=False)
     pedDetalles = db.relationship('PedDetalle', backref= 'pedido')
@@ -140,13 +190,23 @@ class Pedido(db.Model):
     def __repr__(self):
         return f'<Pedido {self.id}>'
 
-        def serialize(self):
-            return {
+    def serialize(self):
+        return {
                 "id": self.id,
                 "user_id": self.user_id,
-                "direccion": self.direccion,
+                "direcciones_id": self.direcciones_id,
+                "status": self.status,
+                "total": self.total
             }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class PedDetalle(db.Model):
     __tablename__ = 'pedDetalles'
@@ -161,21 +221,29 @@ class PedDetalle(db.Model):
     def __repr__(self):
         return f'<PedDetalle {self.id}>'
 
-        def serialize(self):
-            return {
+    def serialize(self):
+        return {
                 "id": self.id,
                 "ped_id": self.ped_id,
                 "prod_id": self.prod_id,
                 "cantidad": self.cantidad,
                 "precio": self.precio,
             }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class Documento(db.Model):
     __tablename__ = 'documentos'
     id = db.Column(db.Integer, primary_key=True)
     users_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    direccions_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"))
+    direcciones_id = db.Column(db.Integer, db.ForeignKey("direcciones.id"))
     iva = db.Column(db.Integer, unique=False, nullable=False)
     total = db.Column(db.Integer, unique=False, nullable=False)
     tipo_id = db.Column(db.Integer, db.ForeignKey("tip_documents.id"))
@@ -183,15 +251,24 @@ class Documento(db.Model):
     def __repr__(self):
         return f'<documentos {self.id}>'
 
-        def serialize(self):
-            return {
+    def serialize(self):
+        return {
                 "id": self.id,
                 "users_id": self.user_id,
-                "direccion_id": self.direccion_id,
+                "direcciones_id": self.direcciones_id,
                 "iva": self.iva,
-                "total": self.total
+                "total": self.total,
+                "tipo_id": self.tipo_id
             }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
 
 class DocDetalle(db.Model):
     __tablename__ = 'docDetalles'
@@ -204,27 +281,44 @@ class DocDetalle(db.Model):
     def __repr__(self):
         return f'<doc_detalles {self.doc_id}>'
 
-        def serialize(self):
-            return {
+    def serialize(self):
+        return {
                 "doc_id": self.doc_id,
                 "prod_id": self.prod_id,
                 "cantidad": self.cantidad,
                 "precio": self.precio
             }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def update(self):
+        db.session.commit()
 
-class tip_document(db.Model):
+    def delete(self):
+        db.session.add(self)
+
+class Tip_document(db.Model):
     __tablename__ = 'tip_documents'
     id = db.Column(db.Integer, primary_key=True)
-    tipo = db.Column(db.Integer, unique=False)
+    tipo = db.Column(db.String(10), unique=False)
     documentos = db.relationship('Documento', backref= 'tip_document')
 
 
     def __repr__(self):
         return f'<tip_documents{self.id}>'
 
-        def serialize(self):
-            return {
+    def serialize(self):
+        return {
                 "id": self.id,
-                "tipo": self.tipo
-            }
+                "tipo": self.tipo,
+                }
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.add(self)
