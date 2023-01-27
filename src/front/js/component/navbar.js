@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoImageUrl from "../../img/logo.png";
+import CarShopping from "./carrito";
 import { Shop } from "../pages/shop";
 
 export const Navbar = () => {
@@ -74,9 +75,9 @@ export const Navbar = () => {
               Buscar
             </button>
           </form>
-          <div className="nav-item">
-              <Link className="nav-link" to="/shopping-cart">
-                <i className="fa-solid fa-cart-shopping fa-xl text-body"/>
+          <div className="nav-item" >
+            <Link  className="nav-link" to="/shopping-cart">
+              <CarShopping/>
               </Link>
           </div>
         </div>
